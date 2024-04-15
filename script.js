@@ -3,17 +3,30 @@ const main = D.querySelector(".main");
 const man = D.querySelector(".man");
 const BODY = D.querySelector("body");
 const sections = D.querySelectorAll(".section");
-//Переменная подсчета расстояния обьекта в котором находиться таргет
-let countDistance = 0;
+// Маркер для сравнения место нахождения
 let positionX = 0;
+const DATA = {
+  0: null,
+  1: null,
+  2: "Меня зовут @name",
+  3: null,
+  4: "Пошли со мной и я расскажу тебе свою историю",
+  5: null,
+  6: null,
+  7: null,
+  8: null,
+  9: null,
+  10: "Когда продет 60 секунд",
+  11: "Это значит, что прошла минута",
+};
 let stepSpeed = 0;
 //Позиция модельки заданная в свойсте left в css файле
 let startposition = Number(getComputedStyle(man).left.replace(/\D/g, ""));
 let manPosition = 0;
 let moveBg = 0;
 BODY.addEventListener("keydown", (key) => {
-  stepSpeed++;
-  moveBg = moveBg + 2;
+  stepSpeed += 1;
+  moveBg += 4;
   if (stepSpeed >= 2) {
     if (key.key === "d" || key.key == "D") {
       if (positionX > 97) {
@@ -30,13 +43,11 @@ BODY.addEventListener("keydown", (key) => {
           left: moveBg,
           behavior: "smooth",
         });
+        manDialog(getIdOfObject());
       }
     }
     stepSpeed = 0;
   }
-  manDialog("Мы в 3 брекпоинте", 3);
-
-  manDialog("Мы в 5 брекпоинте", 5);
 });
 
 BODY.addEventListener("keyup", () => {
@@ -51,49 +62,31 @@ colInSection.forEach((col, i) => {
   col.setAttribute("data-object", i);
 });
 
-// Функция для получение позиции обьекта
-function getObjPosition(NumberOfObj) {
-  let objectSeven = D.querySelector(`[data-object="${NumberOfObj}"]`);
-  let objectDistance = D.querySelector(`[data-object="${NumberOfObj}"]`);
+// Получаем id блока в которм таргет
+function getIdOfObject() {
+  const idObject = D.querySelectorAll(".section-col");
 
-  return [objectSeven.offsetLeft, objectDistance.offsetWidth];
-}
-
-// Отслеживаем столкновение с обьектом
-function isManInObject(positionObject) {
-  console.log(countDistance);
-  // Если таргет внутри обьекта то возвращаем true
-  if (
-    manPosition >=
-      getObjPosition(positionObject)[0] -
-        getObjPosition(positionObject)[1] / 2 &&
-    manPosition <
-      getObjPosition(positionObject)[0] + getObjPosition(positionObject)[1] / 2
-  ) {
-    console.log("asda");
-    countDistance = countDistance + 2;
-    return true;
-  } else {
-    return false;
+  for (let i = 0; i < idObject.length; i++) {
+    if (
+      manPosition > idObject[i].offsetLeft &&
+      manPosition < idObject[i + 1].offsetLeft
+    ) {
+      return idObject[i].dataset.object;
+    }
   }
 }
 
 // Создание диолога
-function manDialog(text, obj) {
-  setTimeout(() => {
-    //Есть ли таргет в объекте
-    if (isManInObject(obj) == true) {
-      //Проверка что таргет находиться в объекте
-      if (countDistance <= getObjPosition(obj)[1] - 2) {
-        console.log("manDialog true");
-        man.innerHTML = `<div class='man__hello'>${text}</div>`;
-      }
-      //Проверка что таргет не находиться в объекте
-      if (countDistance >= getObjPosition(obj)[1] - 2) {
-        console.log("manDialog false");
+function manDialog(objId) {
+  for (const [id, value] of Object.entries(DATA)) {
+    //Ищем совпадение в обьекте с id где назодиться таргет и ключем объекта
+    if (id == objId) {
+      // Проверяем есть ли значение
+      if (value == null) {
         man.innerHTML = "";
-        countDistance = 0;
+      } else {
+        man.innerHTML = `<div class='man__hello'>${value}</div>`;
       }
     }
-  }, 300);
+  }
 }

@@ -34,9 +34,9 @@ BODY.addEventListener("keydown", (key) => {
     }
     stepSpeed = 0;
   }
-  manDialog("Привет", 3);
+  manDialog("Мы в 3 брекпоинте", 3);
 
-  manDialog("5555", 5);
+  manDialog("Мы в 5 брекпоинте", 5);
 });
 
 BODY.addEventListener("keyup", () => {
@@ -62,7 +62,7 @@ function getObjPosition(NumberOfObj) {
 // Отслеживаем столкновение с обьектом
 function isManInObject(positionObject) {
   console.log(countDistance);
-  // Если таргет внутри обьекта то создаем элемент
+  // Если таргет внутри обьекта то возвращаем true
   if (
     manPosition >=
       getObjPosition(positionObject)[0] -
@@ -80,18 +80,20 @@ function isManInObject(positionObject) {
 
 // Создание диолога
 function manDialog(text, obj) {
-  //Есть ли таргет в объекте
-  if (isManInObject(obj) == true) {
-    //Проверка что таргет находиться в объекте
-    if (countDistance <= getObjPosition(obj)[1] - 2) {
-      console.log("manDialog true");
-      man.innerHTML = `<div class='man__hello'>${text}</div>`;
+  setTimeout(() => {
+    //Есть ли таргет в объекте
+    if (isManInObject(obj) == true) {
+      //Проверка что таргет находиться в объекте
+      if (countDistance <= getObjPosition(obj)[1] - 2) {
+        console.log("manDialog true");
+        man.innerHTML = `<div class='man__hello'>${text}</div>`;
+      }
+      //Проверка что таргет не находиться в объекте
+      if (countDistance >= getObjPosition(obj)[1] - 2) {
+        console.log("manDialog false");
+        man.innerHTML = "";
+        countDistance = 0;
+      }
     }
-    //Проверка что таргет не находиться в объекте
-    if (countDistance >= getObjPosition(obj)[1] - 2) {
-      console.log("manDialog false");
-      man.innerHTML = "";
-      countDistance = 0;
-    }
-  }
+  }, 300);
 }

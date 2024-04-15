@@ -41,6 +41,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 20px;
+  text-align: center;
 }
 
 .section {
@@ -51,7 +52,7 @@ body {
   border: 5px solid seagreen;
 }
 .section__welcome {
-  background: url("./img/background-forest.jpg") 0 0/cover;
+  background: url("./img/background-forest.jpg") 0 0 / cover;
 }
 
 .section-col {
@@ -63,4 +64,4 @@ body {
   border: 1px solid fuchsia;
 }
 
-/* 14% *//*# sourceMappingURL=style.css.map */
+/* 14% */ /*# sourceMappingURL=style.css.map */

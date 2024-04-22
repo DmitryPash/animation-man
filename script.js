@@ -29,8 +29,13 @@ BODY.addEventListener("keydown", (key) => {
   stepSpeed += 10;
 
   if (stepSpeed >= 2) {
-    if (key.key === "d" || key.key == "D" || key.key === "в" || key.key == "В") {
-        man.classList.remove('man-go--left')
+    if (
+      key.key === "d" ||
+      key.key == "D" ||
+      key.key === "в" ||
+      key.key == "В"
+    ) {
+      man.classList.remove("man-go--left");
       if (positionX > 97) {
         positionX = 0;
       } else {
@@ -49,28 +54,33 @@ BODY.addEventListener("keydown", (key) => {
         createBlock();
       }
     }
-    if(key.key === "a" || key.key == "A" || key.key === "ф" || key.key == "Ф") {
-        man.classList.add('man-go--left')
-        if(manPosition <= 0) {
-            return
-        }
-        if (positionX > 97) {
-            positionX = 0;
-          } else {
-            moveBg -= 4;
-            manPosition = startposition - (-moveBg);
-            positionX = positionX + 14.2;
-            Object.assign(man.style, {
-              backgroundPositionX: `${positionX}%`,
-              backgroundPositionY: 0,
-              left: `${manPosition}px`,
-            });
-            main.scroll({
-              left: moveBg,
-              behavior: "smooth",
-            });
-            createBlock();
-          }
+    if (
+      key.key === "a" ||
+      key.key == "A" ||
+      key.key === "ф" ||
+      key.key == "Ф"
+    ) {
+      man.classList.add("man-go--left");
+      if (manPosition <= 0) {
+        return;
+      }
+      if (positionX > 97) {
+        positionX = 0;
+      } else {
+        moveBg -= 4;
+        manPosition = startposition - -moveBg;
+        positionX = positionX + 14.2;
+        Object.assign(man.style, {
+          backgroundPositionX: `${positionX}%`,
+          backgroundPositionY: 0,
+          left: `${manPosition}px`,
+        });
+        main.scroll({
+          left: moveBg,
+          behavior: "smooth",
+        });
+        createBlock();
+      }
     }
     stepSpeed = 0;
   }

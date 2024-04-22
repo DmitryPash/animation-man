@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow-y: hidden;
+
+  }
+
+  .man {
+    position: absolute;
+    bottom: 0;
+    left: 250px;
+    width: 320px;
+    height: 320px;
+    background: url("./img/pngegg.png") 42.6% 100%/2600px 960px no-repeat;
+
+    &__dialog {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #585858;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+    }
+
+    &-go--left {
+      transform: scaleX(-1);
+
+      .man__hello {
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  .section {
+    width: 100%;
+    flex: 0 0 100%;
+    display: flex;
+    height: 100%;
+    background: url("./img/bg.jpg") 0 0 / cover repeat;
+    &:nth-child(even) {
+      background-image: url("./img/m_bg.jpg");
+    }
+  }
+
+  .section-col {
+    flex: 0 0 10%;
+    max-width: 10%;
+  }
+  /* 14% */

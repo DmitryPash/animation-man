@@ -3,14 +3,19 @@ const main = D.querySelector(".main");
 const man = D.querySelector(".man");
 const BODY = D.querySelector("body");
 const sections = D.querySelectorAll(".section");
-
+const dataInfo = D.querySelector('[data-info="true"]');
+// const popupInfo = D.querySelector(".popup--welcome");
+let modal;
+//! Блокировка движения - доработать
+let disableMan = false;
 // Маркер для сравнения место нахождения
 let positionX = 0;
+
 const DATA = {
   0: "Дальше пути нету",
   1: null,
-  2: `<div class='man__dialog'>Меня зовут @name</div>`,
-  3: null,
+  2: `<button class='man__dialog'>Хмммм</button>`,
+  3: `<button class='man-popup man-popup--welcome' onClick="openPopup('.popup--welcome')">Проверить документы</button>`,
   4: `<div class='man__zxc'>zxczxc</div>`,
   5: null,
   6: null,
@@ -26,6 +31,12 @@ let startposition = Number(getComputedStyle(man).left.replace(/\D/g, ""));
 let manPosition = 0;
 let moveBg = 0;
 BODY.addEventListener("keydown", (key) => {
+  if (dataInfo) {
+    disableMan = false;
+    closePopup(".popup--info");
+  }
+  if (disableMan) return;
+
   stepSpeed += 10;
 
   if (stepSpeed >= 2) {
@@ -126,3 +137,21 @@ function createBlock() {
     }
   }
 }
+
+//Закрытие поп-апа
+function closePopup(popup) {
+  disableMan = false;
+  modal = document.querySelector(popup);
+  modal.closest(".overlay").classList.remove("overlay--is-open");
+  modal.classList.remove("popup--is-open");
+}
+
+//Открытие поп-апа
+function openPopup(popup) {
+  disableMan = true;
+  modal = document.querySelector(popup);
+  modal.closest(".overlay").classList.add("overlay--is-open");
+  modal.classList.add("popup--is-open");
+}
+
+openPopup(".popup--info");

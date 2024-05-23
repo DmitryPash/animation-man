@@ -4,19 +4,21 @@ const man = D.querySelector(".man");
 const BODY = D.querySelector("body");
 const sections = D.querySelectorAll(".section");
 const dataInfo = D.querySelector('[data-info="true"]');
-// const popupInfo = D.querySelector(".popup--welcome");
+
 let modal;
 //! Блокировка движения - доработать
 let disableMan = false;
+//! Флаг для блокировки текста
+let disableText = false;
 // Маркер для сравнения место нахождения
 let positionX = 0;
 
 const DATA = {
   0: "Дальше пути нету",
   1: null,
-  2: `<button class='man__dialog'>Хмммм</button>`,
+  2: null,
   3: `<button class='man-popup man-popup--welcome' onClick="openPopup('.popup--welcome')">Проверить документы</button>`,
-  4: `<div class='man__zxc'>zxczxc</div>`,
+  4: `<button class='man__dialog'>Тут я типо рассказываю какой-то текст! И пока он не закончит печатать, человече дальше не пойдет😉</button>`,
   5: null,
   6: null,
   7: null,
@@ -31,7 +33,9 @@ let startposition = Number(getComputedStyle(man).left.replace(/\D/g, ""));
 let manPosition = 0;
 let moveBg = 0;
 BODY.addEventListener("keydown", (key) => {
-  if (dataInfo) {
+  if (dataInfo.dataset.info == "true") {
+    console.log(dataInfo);
+    dataInfo.dataset.info = false;
     disableMan = false;
     closePopup(".popup--info");
   }
@@ -133,6 +137,9 @@ function createBlock() {
         man.innerHTML = "";
       } else {
         man.innerHTML = value;
+        if (id == 4) {
+          writeText(".man__dialog");
+        }
       }
     }
   }
@@ -155,3 +162,31 @@ function openPopup(popup) {
 }
 
 openPopup(".popup--info");
+
+function writeText(classOf) {
+  const manDialog = D.querySelector(classOf).innerHTML;
+  if (!disableText) {
+    disableMan = true;
+    const dialog = D.querySelector(classOf);
+    let writeText = "";
+    let writeAnimation = (i, callback) => {
+      setTimeout(() => {
+        writeText += manDialog[i];
+        dialog.innerHTML = writeText;
+
+        if (i === manDialog.length - 1 && callback) {
+          callback();
+        }
+      }, 50 * i);
+    };
+
+    for (let i = 0; i < manDialog.length; i++) {
+      writeAnimation(i, () => {
+        disableText = true;
+        disableMan = false;
+      });
+    }
+  } else {
+    manDialog.innerHTML = writeText;
+  }
+}

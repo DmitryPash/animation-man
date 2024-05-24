@@ -19,7 +19,7 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  // overflow: hidden;d
 }
 
 .man {
@@ -52,7 +52,10 @@ body {
     }
   }
 }
-
+.man-btn {
+  position: relative;
+  z-index: 1;
+}
 .overlay {
   display: none;
   position: fixed;
@@ -80,6 +83,7 @@ body {
 }
 
 .section-col {
+  position: relative;
   flex: 0 0 10%;
   max-width: 10%;
 }
@@ -150,12 +154,54 @@ body {
   }
 }
 
+.popup-build {
+  width: 100%;
+  height: 100%;
+  background: {
+    position: center;
+    size: cover;
+    repeat: no-repeat;
+  }
+
+  &--farba {
+    background-image: url("./img/office.jpg");
+  }
+  &--pizero {
+    background-image: url("./img/office-2.jpg");
+  }
+}
+
 .popup-info {
   &__age,
   &__name,
   &__post {
     font-size: 32px;
     margin-bottom: 32px;
+  }
+}
+
+.build {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 290px;
+  width: 200px;
+  height: 80px;
+  background-color: transparent;
+  border: 2px dashed #ffcd92;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 0 0 10px 10px #ffcd92;
+  }
+
+  &--farba {
+    left: -80px;
+  }
+
+  &--pizero {
+    left: 60px;
   }
 }
 /* 14% */

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const BODY = document.querySelector("body");
+      let flag = true;
+
+      BODY.addEventListener("keydown", () => {
+        if (flag) doFunction();
+        else return;
+      });
+
+      function doFunction() {
+        let writeAnimation = (i) => {
+          setTimeout(() => {
+            console.log(i);
+          }, 50 * i);
+        };
+
+        for (let i = 0; i < 15; i++) {
+          writeAnimation(i);
+        }
+
+        flag = false;
+      }
+    </script>
+  </body>
+</html>

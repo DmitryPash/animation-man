@@ -19,11 +19,19 @@
         <div class="section-col"></div>
         <div class="section-col"></div>
         <div class="section-col"></div>
-        <div class="section-col"></div>
+        <div class="section-col">
+          <div data-build="farba" class="build build--farba">
+            <h1>Farba</h1>
+          </div>
+        </div>
       </section>
       <section class="section">
         <div class="section-col"></div>
-        <div class="section-col"></div>
+        <div class="section-col">
+          <div data-build="pizero" class="build build--pizero">
+            <h1>Pizero</h1>
+          </div>
+        </div>
         <div class="section-col"></div>
         <div class="section-col"></div>
       </section>
@@ -66,6 +74,24 @@
               <div class="popup__description">Нажмите что-бы продолжить</div>
             </div>
           </div>
+        </div>
+
+        <div class="popup popup-build popup-build--farba">
+          <div class="popup__close" onClick="closePopup('.popup-build--farba')">
+            ❌
+          </div>
+          <div class="popup__body">farba</div>
+          <!-- <div class="man"></div> -->
+        </div>
+        <div class="popup popup-build popup-build--pizero">
+          <div
+            class="popup__close"
+            onClick="closePopup('.popup-build--pizero')"
+          >
+            ❌
+          </div>
+          <div class="popup__body">pizero</div>
+          <!-- <div class="man"></div> -->
         </div>
       </div>
     </div>

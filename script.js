@@ -4,6 +4,7 @@ const man = D.querySelector(".man");
 const BODY = D.querySelector("body");
 const sections = D.querySelectorAll(".section");
 const dataInfo = D.querySelector('[data-info="true"]');
+const builds = D.querySelectorAll(".build");
 
 let modal;
 //! Блокировка движения - доработать
@@ -17,7 +18,7 @@ const DATA = {
   0: "Дальше пути нету",
   1: null,
   2: null,
-  3: `<button class='man-popup man-popup--welcome' onClick="openPopup('.popup--welcome')">Проверить документы</button>`,
+  3: `<button class='man-btn man-btn--welcome' onClick="openPopup('.popup--welcome')">Проверить документы</button>`,
   4: `<button class='man__dialog'>Тут я типо рассказываю какой-то текст! И пока он не закончит печатать, человече дальше не пойдет😉</button>`,
   5: null,
   6: null,
@@ -34,7 +35,6 @@ let manPosition = 0;
 let moveBg = 0;
 BODY.addEventListener("keydown", (key) => {
   if (dataInfo.dataset.info == "true") {
-    console.log(dataInfo);
     dataInfo.dataset.info = false;
     disableMan = false;
     closePopup(".popup--info");
@@ -155,6 +155,7 @@ function closePopup(popup) {
 
 //Открытие поп-апа
 function openPopup(popup) {
+  console.log("asdasd");
   disableMan = true;
   modal = document.querySelector(popup);
   modal.closest(".overlay").classList.add("overlay--is-open");
@@ -162,7 +163,7 @@ function openPopup(popup) {
 }
 
 openPopup(".popup--info");
-
+// Анимация для написания текста
 function writeText(classOf) {
   const manDialog = D.querySelector(classOf).innerHTML;
   if (!disableText) {
@@ -190,3 +191,9 @@ function writeText(classOf) {
     manDialog.innerHTML = writeText;
   }
 }
+
+builds.forEach((build) => {
+  build.addEventListener("click", () => {
+    openPopup(`.popup-build--${build.dataset.build}`);
+  });
+});
